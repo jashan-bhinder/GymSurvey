@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8"/>
+        <title>Gym Survey - Admin</title>
+    </head>
+    <body>
+        <h1>Admin: Responses</h1>
+
+        <p id = "summary">Loading...</p>
+        <ol id = "list"></ol>
+
+        <p><a href="./index.html">Back to survey</a></p>
+
+
+        <script>
+            const STORAGE_KEY = 'gymsurvey:responses'
+            const summary = document.getElementById('summary');
+            const list = document.getElementById('list');
+
+            function loadResponses(){
+                const raw = localStorage.getItem(STORAGE_KEY);
+                try {
+                    return raw ? JSON.parse(raw) : [];
+                }
+                catch{
+                    return[];
+                }
+            }
+            const responses = loadResponses();
+            summary.textContent = `Tota; responses: ${responses.length}`;
+
+            for (const item of responses) {
+                const li = document.createElement('li');
+                const when = new Date(item.at).toLocaleString();
+                li.textContent = `ValueL ${item.value} - at ${when}`;
+                list.appendChild(li);
+            }
+        </script>
+    </body>
+</html>
