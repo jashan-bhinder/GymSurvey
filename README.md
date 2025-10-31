@@ -16,6 +16,7 @@ Frontend
     TanStack Query
     — Server state management (data fetching, caching, mutation)
 
+
 Backend
     Next.js Route Handlers — RESTful API endpoints with server actions where useful
     PostgreSQL (Supabase) — Managed relational database with RLS and migrations

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Gym Survey v0</title>
+    
   </head>
   <body>
     <h1>Gym Survey (demo)</h1>
@@ -24,9 +25,29 @@
     <p id="status"></p>
 
     <script>
+      const STORAGE_KEY = 'gymsurvey:responses'
       const form = document.getElementById('survey-form');
       const status = document.getElementById('status');
       const input = document.getElementById('answer');
+
+      function loadResponses(){
+        const raw = localStorage.getItem(STORAGE_KEY);
+        try {
+          return raw ? JSON.parse(raw) : [];
+        } catch {
+          // If something bad is in localStorage, start fresh.
+          return [];
+        }
+      }
+
+      function saveResponses(responses) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+      }
+
+      let responses = loadResponses();
+      status.textContent = `You have ${responses.length} saved response(s) locally.`
+
+
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -43,7 +64,10 @@
           return;
         }
 
-        status.textContent = `Submitted: ${value} (stored locally for now)`;
+        responses.push({value, at: new Date().toISOString() });
+        saveResponses(responses);
+
+        status.textContent = `Submitted: ${value} (saved locally). Total: ${responses.length}`;
         input.value = '';
       });
     </script>
