@@ -7,6 +7,8 @@
     <body>
         <h1>Admin: Responses</h1>
 
+        <button id = "clear">Clear all responses</button>
+
         <p id = "summary">Loading...</p>
         <ol id = "list"></ol>
 
@@ -27,6 +29,20 @@
                     return[];
                 }
             }
+
+            function saveResponses(responses){
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+            }
+            document.getElementById('clear').addEventListener('click', () =>{
+
+                const ok = confirm('Delete ALL saved responses? This cannot be undone. ')
+                if (!ok) return;
+
+                saveResponses([]);
+                summary.textContent = 'Total Responses: 0'
+
+                while (list.firstChild) list.removeChild(list.firstChild);
+            });
             const responses = loadResponses();
             summary.textContent = `Tota; responses: ${responses.length}`;
 
