@@ -8,6 +8,8 @@
         <h1>Admin: Responses</h1>
 
         <button id = "clear">Clear all responses</button>
+        <button id = "export">Export CSV</button>
+
 
         <p id = "summary">Loading...</p>
         <ol id = "list"></ol>
@@ -33,6 +35,41 @@
             function saveResponses(responses){
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
             }
+
+            function toCSV (rows) {
+                const header = ['value', 'at'];
+                const lines = [header.join(',')];
+
+                for (const r of rows) {
+                    const v = String(r.value);
+                    const a = String(r.at);
+                    lines.push([v, a].join(',')); 
+                }
+                return lines.join('\n')
+            }
+
+            function download(filename, text) {
+                const blob = new Blob([text], { type: 'text/csv;charset=utf-8;' }) 
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            
+            }
+            document.getElementById('export').addEventListener('click', () => {
+                if (!responses.length){
+                    alert('No responses to export,');
+                    return;
+                }
+                const csv = toCSV(responses);
+                download('responses.csv', csv)
+            })
+
+
             document.getElementById('clear').addEventListener('click', () =>{
 
                 const ok = confirm('Delete ALL saved responses? This cannot be undone. ')
