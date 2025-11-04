@@ -3,6 +3,65 @@
     <head>
         <meta charset = "utf-8"/>
         <title>Gym Survey - Admin</title>
+            <style>
+      :root { --gap: 12px; --radius: 8px; }
+      * {box-sizing: border-box}
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        margin: 12px auto;
+        padding: 0 16px;
+        max-width: 720px;
+        line-height: 1.5;
+        color: #111;
+        background: #fafafa;
+      }
+      h1{
+        margin-bottom: 16px
+      }
+      form {
+        display: grid;
+        gap: var(--gap);
+        margin: 16px 0 8px;
+      }
+      label {
+        font-weight: 600;
+      }
+      input [type="number"] {
+        width: 180px;
+        padding: 8px 10px;
+        border: 1px solid #d0d0d0;
+        border-radius: var(--radius);
+        background: #fff;
+        font-size:16px;
+      }
+      input:focus{
+        outline: none;
+        border-color: #6b9cff;
+        box-shadow: 0 0 0 3px rgba(107,156,255,0.25);
+      }
+      button{
+        width: fit-content;
+        padding: 8px 14px;
+        border-radius: var(--radius);
+        border: 1px solid #1f6feb;
+        background: #2563eb;
+        color: white;
+      }
+      button:hover{
+        background: #1d43d8;
+      }
+      #status {
+        margin-top: 8px;
+        color: #374151;
+      }
+      a {
+        color: #2563eb;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
     </head>
     <body>
         <h1>Admin: Responses</h1>
