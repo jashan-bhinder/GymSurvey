@@ -20,7 +20,7 @@ form {
 label {
     font-weight: 600;
 }
-input [type="number"] {
+input[type="number"] {
     width: 180px;
     padding: 8px 10px;
     border: 1px solid #d0d0d0;
